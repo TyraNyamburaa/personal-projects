@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do-List</title>
+    <style>
+        body {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+
+        .to-do-card {
+            display: flex;
+            justify-content: center;
+            background-color: #00ffff;
+            align-items: center;
+            height: 100vh;
+        }
+        .contents {
+            background-color: #ffffff;
+            padding: 40px;
+            width: 90%;
+            max-width: 500px;
+            border-radius: 20px;
+        }
+        .contents > h1 {
+            text-align: center;
+            font-size: 2.3rem;
+            color: #08b1b1;
+            margin: 20px;
+        }
+        .contents > input {
+            text-align: center;
+            height: 30px;
+            border: 0.5px solid #08b1b1;
+            border-radius: 10px;
+            width: 62%;
+            margin: 0 20px;
+        }
+
+        .contents > button {
+            height: 30px;
+            background-color: #08b1b1;
+            width: 90px;
+            border: none;
+            border-radius: 10px;
+        }
+
+        .contents > button:hover {
+            background-color: #00ffff;
+            color: #000000;
+        }
+        .completed {
+            text-decoration: line-through;
+            color: gray;
+        }
+        #taskList {
+            list-style: none;
+            padding: 0;
+            margin-top: 30px;
+        }
+
+        #taskList li {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #f9f9f9;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 8px;
+            border-left: 5px solid #08b1b1;
+        }
+
+        /* Style for both complete and remove button*/
+
+        #taskList button {
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            margin-left: 5px;
+            transition: 0.3s;
+        }
+
+        /* Green check button */
+        #taskList button:first-child {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        /* Red remove button */
+        .remove-btn {
+            background-color: #ffebee;
+            color: #c62828;
+        }
+
+        .remove-btn:hover {
+            background-color: #c62828;
+            color: white;
+        }
+
+        /* This makes the text look nice when finished */
+        .completed {
+            text-decoration: line-through;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="to-do-card">
+        <div class="contents">
+            <h1>Task Manager</h1>
+            <input id="task_input" type="text" placeholder="What are we doing today?">
+            <button id="task_btn" onclick="add_task()">Add Task</button>
+            <ul id="taskList" style="list-style: none; padding: 0; margin-top: 20px;"></ul>
+        </div>
+    </div>
+    <script>
+        function add_task() {
+            const taskInput = document.getElementById('task_input');
+            const taskText = taskInput.value.trim(); 
+
+            if (taskText == '') {
+                alert('Please enter a task');
+                return;
+            }
+
+            const taskList = document.getElementById('taskList');
+            const listItem = document.createElement('li');
+
+            // Task text span
+            const taskSpan = document.createElement('span');
+            taskSpan.textContent = taskText;
+
+            // Complete button
+            const completeButton = document.createElement('button');
+            completeButton.innerHTML = '✔'; // Green checkmark icon
+            completeButton.onclick = () => {
+                taskSpan.classList.toggle('completed');
+            };
+
+            // Remove button
+            const removeButton = document.createElement('button');
+            removeButton.textContent = 'Remove';
+            removeButton.className = 'remove-btn';
+            removeButton.onclick = () => {
+                taskList.removeChild(listItem);
+            };
+
+            // Append everything
+            listItem.appendChild(completeButton);
+            listItem.appendChild(taskSpan);
+            listItem.appendChild(removeButton);
+
+            taskList.appendChild(listItem);
+
+            taskInput.value = ''; // Clear input field
+        }
+    </script>
+</body>
+</html>
