@@ -1,0 +1,2522 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Technical documentation for the SmartMama maternal-health platform">
+      
+      
+      
+        <link rel="canonical" href="https://<your-github-org>.github.io/<your-repository>/database/">
+      
+      
+        <link rel="prev" href="../backend/">
+      
+      
+        <link rel="next" href="../ai/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/smartmama-logo.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Database Overview - SmartMama Technical Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/style.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#database-overview" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="SmartMama Technical Documentation" class="md-header__button md-logo" aria-label="SmartMama Technical Documentation" data-md-component="logo">
+      
+  <img src="../assets/images/smartmama-logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            SmartMama Technical Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Database Overview
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../architecture/" class="md-tabs__link">
+          
+  
+  
+  Architecture
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../backend/" class="md-tabs__link">
+          
+  
+  
+  Backend
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+  Database
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../ai/" class="md-tabs__link">
+          
+  
+  
+  AI
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../mobile/" class="md-tabs__link">
+          
+  
+  
+  Mobile
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../web/" class="md-tabs__link">
+          
+  
+  
+  Web / Dashboards
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../security/" class="md-tabs__link">
+          
+  
+  
+  Security
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../integrations/" class="md-tabs__link">
+          
+  
+  
+  Integrations
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../testing/" class="md-tabs__link">
+          
+  
+  
+  Testing & QA
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../standards/code-style/" class="md-tabs__link">
+          
+  
+  
+  Code Standards
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../deployment/" class="md-tabs__link">
+          
+  
+  
+  Deployment
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../ux/product-design/" class="md-tabs__link">
+          
+  
+  
+  Product & UX
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../glossary/glossary/" class="md-tabs__link">
+          
+  
+  
+  Glossary
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="SmartMama Technical Documentation" class="md-nav__button md-logo" aria-label="SmartMama Technical Documentation" data-md-component="logo">
+      
+  <img src="../assets/images/smartmama-logo.png" alt="logo">
+
+    </a>
+    SmartMama Technical Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Architecture
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SmartMama Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backend
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Backend
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../backend/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backend Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Database
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Database
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Database Overview
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Database Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#getting-started-database-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Getting started - Database Setup
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#install-postgresql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Install PostgreSQL
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-the-database" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create the database
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configure-the-connection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configure the connection
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#database-migrations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Database Migrations
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    AI
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Random Forest
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mobile
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Mobile
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mobile/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mobile Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Web / Dashboards
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Web / Dashboards
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../web/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Web Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Security
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Security
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Security Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integrations
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Integrations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../integrations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integration Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../integrations/paypal.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PayPal Payments
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Testing & QA
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Testing & QA
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Testing Strategy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Code Standards
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Code Standards
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../standards/code-style/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Code Style
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deployment
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Deployment
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../deployment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deployment Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Product & UX
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Product & UX
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ux/product-design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Product Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_13" >
+        
+          
+          <label class="md-nav__link" for="__nav_13" id="__nav_13_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossary
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_13_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_13">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Glossary
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../glossary/glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#getting-started-database-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Getting started - Database Setup
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#install-postgresql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Install PostgreSQL
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-the-database" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create the database
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configure-the-connection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configure the connection
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#database-migrations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Database Migrations
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="database-overview">Database Overview<a class="headerlink" href="#database-overview" title="Permanent link">&para;</a></h1>
+<p>SmartMama uses PostgreSQL and a relational model.</p>
+<p>The original ERD defines the maternal domain around CHVs, mothers, pregnancies, visits, risk assessments, referrals and locations. The system has since evolved to include a shared user model and governance/security entities.</p>
+<p>The database documentation should therefore be maintained from the live SQLAlchemy models/migrations. The ERD remains useful as a domain reference but is not the final authority when implementation changes.</p>
+<h2 id="getting-started-database-setup">Getting started - Database Setup<a class="headerlink" href="#getting-started-database-setup" title="Permanent link">&para;</a></h2>
+<p>SmartMama uses <strong>PostgreSQL</strong> as its relational database.</p>
+<h2 id="install-postgresql">Install PostgreSQL<a class="headerlink" href="#install-postgresql" title="Permanent link">&para;</a></h2>
+<p>Install PostgreSQL for your operating system:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Ubuntu/Debian</span>
+sudo<span class="w"> </span>apt<span class="w"> </span>update
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>postgresql<span class="w"> </span>postgresql-contrib
+
+<span class="c1"># macOS with Homebrew</span>
+brew<span class="w"> </span>install<span class="w"> </span>postgresql
+</code></pre></div>
+<h2 id="create-the-database">Create the database<a class="headerlink" href="#create-the-database" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>-u<span class="w"> </span>postgres<span class="w"> </span>psql
+CREATE<span class="w"> </span>USER<span class="w"> </span>smartmama_user<span class="w"> </span>WITH<span class="w"> </span>PASSWORD<span class="w"> </span><span class="s1">&#39;your_password&#39;</span><span class="p">;</span>
+CREATE<span class="w"> </span>DATABASE<span class="w"> </span>smartmama_db<span class="w"> </span>OWNER<span class="w"> </span>smartmama_user<span class="p">;</span>
+GRANT<span class="w"> </span>ALL<span class="w"> </span>PRIVILEGES<span class="w"> </span>ON<span class="w"> </span>DATABASE<span class="w"> </span>smartmama_db<span class="w"> </span>TO<span class="w"> </span>smartmama_user<span class="p">;</span>
+<span class="se">\q</span>
+</code></pre></div>
+<h2 id="configure-the-connection">Configure the connection<a class="headerlink" href="#configure-the-connection" title="Permanent link">&para;</a></h2>
+<p>Set the <code>DATABASE_URL</code> environment variable in your <code>.env</code> file:</p>
+<div class="highlight"><pre><span></span><code>DATABASE_URL=postgresql://smartmama_user:your_password@localhost:5432/smartmama_db
+</code></pre></div>
+<p>For production, use the deployment platform's database URL.</p>
+<p>See <a href="../database/database.md">Database</a> for the full database documentation.</p>
+<h2 id="database-migrations">Database Migrations<a class="headerlink" href="#database-migrations" title="Permanent link">&para;</a></h2>
+<p>Use the migration tool configured by the backend repository.</p>
+<p>Before applying migrations:</p>
+<ol>
+<li>activate the Python environment;</li>
+<li>confirm <code>DATABASE_URL</code>;</li>
+<li>review the migration;</li>
+<li>back up production data where appropriate;</li>
+<li>apply the migration;</li>
+<li>verify the schema.</li>
+</ol>
+<p>If Alembic is used in the repository, the typical commands are:</p>
+<div class="highlight"><pre><span></span><code>alembic<span class="w"> </span>upgrade<span class="w"> </span>head
+alembic<span class="w"> </span>revision<span class="w"> </span>--autogenerate<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;describe change&quot;</span>
+</code></pre></div>
+<p><strong>Do not run these commands blindly.</strong> Use the migration configuration and scripts actually present in the repository.</p>
+<h1 id="erd">ERD<a class="headerlink" href="#erd" title="Permanent link">&para;</a></h1>
+<p>The project already has an ERD document covering the original maternal domain.</p>
+<p><strong>Source:</strong> <code>CYBERNETICS ERD document.pdf</code></p>
+<p>It defines relationships including:</p>
+<div class="highlight"><pre><span></span><code>CHV → Mothers
+Mother → Pregnancy
+Pregnancy → Visit
+Visit → Risk Assessment
+Risk Assessment → Referral
+Mother → Location
+</code></pre></div>
+<p>The ERD should be updated to reflect the newer shared-user architecture and governance entities:</p>
+<div class="highlight"><pre><span></span><code>User
+ ├── CHV
+ ├── Supervisor
+ ├── Admin
+ └── Super Admin
+
+User/Role/Assignment
+Consent
+Audit Log
+Tickets
+Verification records
+</code></pre></div>
+<p>The live migrations and ORM models must remain the source of truth.</p>
+<h1 id="data-model">Data Model<a class="headerlink" href="#data-model" title="Permanent link">&para;</a></h1>
+<p>The original model documented these core entities:</p>
+<ul>
+<li><code>chv</code></li>
+<li><code>mothers</code></li>
+<li><code>pregnancies_tracking</code></li>
+<li><code>visit_log</code></li>
+<li><code>risk_assessments</code></li>
+<li><code>referral</code></li>
+<li><code>location</code></li>
+</ul>
+<p>The evolved design adds cross-cutting entities.</p>
+<h2 id="shared-user-model">Shared user model<a class="headerlink" href="#shared-user-model" title="Permanent link">&para;</a></h2>
+<p>A <code>user</code> table should contain attributes common to all authenticated users, such as:</p>
+<ul>
+<li>unique user ID;</li>
+<li>login identifier;</li>
+<li>password hash;</li>
+<li>role;</li>
+<li>active/disabled state;</li>
+<li>verification state where applicable;</li>
+<li>timestamps.</li>
+</ul>
+<p>Role-specific tables hold attributes unique to a CHV, supervisor, admin or super-admin.</p>
+<p>This prevents duplication of authentication fields and gives the system a single identity anchor for audit logging and authorisation.</p>
+<h2 id="governance-entities">Governance entities<a class="headerlink" href="#governance-entities" title="Permanent link">&para;</a></h2>
+<p>The system should include explicit persistence for:</p>
+<ul>
+<li>consent;</li>
+<li>audit/activity logs;</li>
+<li>supervisor-to-CHV assignments;</li>
+<li>verification submissions/status;</li>
+<li>support tickets where implemented;</li>
+<li>MFA/TOTP configuration metadata where implemented.</li>
+</ul>
+<p>Exact columns belong in the live model/data dictionary.</p>
+<h1 id="tables">Tables<a class="headerlink" href="#tables" title="Permanent link">&para;</a></h1>
+<h2 id="core-maternal-tables">Core maternal tables<a class="headerlink" href="#core-maternal-tables" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Table</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>user</code></td>
+<td>Shared authentication/identity attributes</td>
+</tr>
+<tr>
+<td><code>chv</code></td>
+<td>CHV-specific profile and operational information</td>
+</tr>
+<tr>
+<td><code>supervisor</code></td>
+<td>Supervisor-specific information</td>
+</tr>
+<tr>
+<td><code>admin</code></td>
+<td>Admin-specific information</td>
+</tr>
+<tr>
+<td><code>super_admin</code></td>
+<td>Super-admin-specific information</td>
+</tr>
+<tr>
+<td><code>mothers</code></td>
+<td>Maternal profile</td>
+</tr>
+<tr>
+<td><code>pregnancies_tracking</code></td>
+<td>Pregnancy lifecycle</td>
+</tr>
+<tr>
+<td><code>visit_log</code></td>
+<td>Household-visit observations</td>
+</tr>
+<tr>
+<td><code>risk_assessments</code></td>
+<td>Model-generated classifications</td>
+</tr>
+<tr>
+<td><code>referral</code></td>
+<td>Referral workflow</td>
+</tr>
+<tr>
+<td><code>location</code></td>
+<td>Location associated with maternal records</td>
+</tr>
+<tr>
+<td><code>consent</code></td>
+<td>Consent records</td>
+</tr>
+<tr>
+<td><code>audit_log</code></td>
+<td>Security/operational activity</td>
+</tr>
+<tr>
+<td><code>tickets</code></td>
+<td>Support/issue workflow</td>
+</tr>
+<tr>
+<td><code>chv_assignments</code></td>
+<td>Supervisor-to-CHV scope, if implemented as a separate entity</td>
+</tr>
+<tr>
+<td><code>verification</code></td>
+<td>Identity/document verification state, if implemented separately</td>
+</tr>
+</tbody>
+</table>
+<h1 id="data-dictionary">Data Dictionary<a class="headerlink" href="#data-dictionary" title="Permanent link">&para;</a></h1>
+<p>The original ERD documents the following core fields.</p>
+<h3 id="chv">CHV<a class="headerlink" href="#chv" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Constraint</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>chv_id</code></td>
+<td>string</td>
+<td>PK</td>
+</tr>
+<tr>
+<td><code>national_id</code></td>
+<td>string</td>
+<td>required</td>
+</tr>
+<tr>
+<td><code>first_name</code></td>
+<td>string</td>
+<td>required</td>
+</tr>
+<tr>
+<td><code>last_name</code></td>
+<td>string</td>
+<td>required</td>
+</tr>
+<tr>
+<td><code>phone_number</code></td>
+<td>string</td>
+<td>unique/required</td>
+</tr>
+<tr>
+<td><code>hashed_password</code></td>
+<td>string</td>
+<td>required in original model; evolved design moves auth to <code>user</code></td>
+</tr>
+<tr>
+<td><code>is_active</code></td>
+<td>boolean</td>
+<td>required</td>
+</tr>
+<tr>
+<td><code>created_at</code></td>
+<td>datetime</td>
+<td>required</td>
+</tr>
+</tbody>
+</table>
+<h3 id="mother">Mother<a class="headerlink" href="#mother" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Constraint</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>mother_id</code></td>
+<td>string/UUID</td>
+<td>PK</td>
+</tr>
+<tr>
+<td><code>chv_id</code></td>
+<td>FK</td>
+<td>required</td>
+</tr>
+<tr>
+<td><code>location_id</code></td>
+<td>FK</td>
+<td>required where location is collected</td>
+</tr>
+<tr>
+<td><code>national_id</code></td>
+<td>string</td>
+<td>unique/required according to implementation</td>
+</tr>
+<tr>
+<td><code>first_name</code></td>
+<td>string</td>
+<td>required</td>
+</tr>
+<tr>
+<td><code>last_name</code></td>
+<td>string</td>
+<td>required</td>
+</tr>
+<tr>
+<td><code>phone_number</code></td>
+<td>string</td>
+<td>required</td>
+</tr>
+<tr>
+<td><code>date_of_birth</code></td>
+<td>date</td>
+<td>required</td>
+</tr>
+<tr>
+<td><code>expected_delivery_date</code></td>
+<td>date</td>
+<td>required</td>
+</tr>
+<tr>
+<td><code>consent_given</code></td>
+<td>boolean</td>
+<td>required in original model; superseded by dedicated consent records</td>
+</tr>
+<tr>
+<td><code>created_at</code></td>
+<td>datetime</td>
+<td>required</td>
+</tr>
+</tbody>
+</table>
+<h3 id="pregnancy">Pregnancy<a class="headerlink" href="#pregnancy" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>pregnancy_id</code></td>
+<td>identifier</td>
+<td>Primary key</td>
+</tr>
+<tr>
+<td><code>mother_id</code></td>
+<td>FK</td>
+<td>Mother</td>
+</tr>
+<tr>
+<td><code>expected_delivery_date</code></td>
+<td>datetime/date</td>
+<td>Expected delivery</td>
+</tr>
+<tr>
+<td><code>last_menstrual_period</code></td>
+<td>date</td>
+<td>LMP</td>
+</tr>
+<tr>
+<td><code>gestational_age_at_registration</code></td>
+<td>integer</td>
+<td>Weeks</td>
+</tr>
+<tr>
+<td><code>pregnancy_status</code></td>
+<td>enum/string</td>
+<td>Active/delivered/miscarriage in original ERD</td>
+</tr>
+<tr>
+<td><code>antenatal_visit_count</code></td>
+<td>integer</td>
+<td>ANC count</td>
+</tr>
+<tr>
+<td><code>rhesus_factor</code></td>
+<td>string</td>
+<td>Rh factor</td>
+</tr>
+<tr>
+<td><code>created_at</code></td>
+<td>datetime</td>
+<td>Created</td>
+</tr>
+<tr>
+<td><code>updated_at</code></td>
+<td>datetime</td>
+<td>Updated</td>
+</tr>
+</tbody>
+</table>
+<h3 id="visit">Visit<a class="headerlink" href="#visit" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>visit_id</code></td>
+<td>Visit identifier</td>
+</tr>
+<tr>
+<td><code>mother_id</code></td>
+<td>Mother</td>
+</tr>
+<tr>
+<td><code>pregnancy_id</code></td>
+<td>Active pregnancy</td>
+</tr>
+<tr>
+<td><code>visit_date</code></td>
+<td>Visit date</td>
+</tr>
+<tr>
+<td><code>gestational_age</code></td>
+<td>Gestational age</td>
+</tr>
+<tr>
+<td><code>blood_pressure</code></td>
+<td>Recorded BP</td>
+</tr>
+<tr>
+<td><code>temperature</code></td>
+<td>Body temperature</td>
+</tr>
+<tr>
+<td><code>symptoms_logged</code></td>
+<td>Symptoms/observations</td>
+</tr>
+</tbody>
+</table>
+<h3 id="risk-assessment">Risk assessment<a class="headerlink" href="#risk-assessment" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>risk_id</code></td>
+<td>Assessment identifier</td>
+</tr>
+<tr>
+<td><code>visit_id</code></td>
+<td>Source visit</td>
+</tr>
+<tr>
+<td><code>mother_id</code></td>
+<td>Mother</td>
+</tr>
+<tr>
+<td><code>pregnancy_id</code></td>
+<td>Pregnancy</td>
+</tr>
+<tr>
+<td><code>risk_level</code></td>
+<td>Low/medium/high classification</td>
+</tr>
+<tr>
+<td><code>confidence_score</code></td>
+<td>Model confidence where exposed</td>
+</tr>
+<tr>
+<td><code>link_url</code></td>
+<td>Secure summary link where used</td>
+</tr>
+<tr>
+<td><code>created_at</code></td>
+<td>Classification timestamp</td>
+</tr>
+</tbody>
+</table>
+<h3 id="referral">Referral<a class="headerlink" href="#referral" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>referral_id</code></td>
+<td>Referral identifier</td>
+</tr>
+<tr>
+<td><code>risk_id</code></td>
+<td>Triggering assessment</td>
+</tr>
+<tr>
+<td><code>mother_id</code></td>
+<td>Mother</td>
+</tr>
+<tr>
+<td><code>referral_date</code></td>
+<td>Referral time</td>
+</tr>
+<tr>
+<td><code>link_url</code></td>
+<td>Secure summary</td>
+</tr>
+</tbody>
+</table>
+<h3 id="location">Location<a class="headerlink" href="#location" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>location_id</code></td>
+<td>Location identifier</td>
+</tr>
+<tr>
+<td><code>mother_id</code></td>
+<td>Mother</td>
+</tr>
+<tr>
+<td><code>latitude</code></td>
+<td>Latitude</td>
+</tr>
+<tr>
+<td><code>longitude</code></td>
+<td>Longitude</td>
+</tr>
+</tbody>
+</table>
+<p>The new <code>user</code>, consent, audit, verification, assignment and administrative tables must be generated from the actual implementation before final production sign-off.</p>
+<h1 id="relationships">Relationships<a class="headerlink" href="#relationships" title="Permanent link">&para;</a></h1>
+<p>Core relationship chain:</p>
+<div class="highlight"><pre><span></span><code>User
+ ├─1:1→ CHV / Supervisor / Admin / Super Admin
+ │
+CHV
+ └─1:M→ Mother
+       └─1:M→ Pregnancy
+              └─1:M→ Visit
+                     └─1:1/M→ Risk Assessment
+                            └─1:M→ Referral
+
+Mother
+ └─1:M→ Location (depending on location model)
+Mother
+ └─1:M→ Consent
+User
+ └─1:M→ Audit Log
+Supervisor
+ └─M:M→ CHV through assignment/scope
+</code></pre></div>
+<p>Actual cardinalities must match the ORM/migration implementation.</p>
+<h1 id="constraints">Constraints<a class="headerlink" href="#constraints" title="Permanent link">&para;</a></h1>
+<p>Security and data-integrity constraints are not only database constraints.</p>
+<h2 id="database-constraints">Database constraints<a class="headerlink" href="#database-constraints" title="Permanent link">&para;</a></h2>
+<p>Use primary keys, foreign keys, unique constraints, non-null constraints and appropriate indexes.</p>
+<h2 id="business-constraints">Business constraints<a class="headerlink" href="#business-constraints" title="Permanent link">&para;</a></h2>
+<h3 id="chv-scope">CHV scope<a class="headerlink" href="#chv-scope" title="Permanent link">&para;</a></h3>
+<p>A CHV may access only maternal records within their authorised assignment/ownership scope.</p>
+<h3 id="supervisor-scope">Supervisor scope<a class="headerlink" href="#supervisor-scope" title="Permanent link">&para;</a></h3>
+<p>A supervisor may review only CHVs assigned to that supervisor.</p>
+<h3 id="admin-assignment">Admin assignment<a class="headerlink" href="#admin-assignment" title="Permanent link">&para;</a></h3>
+<p>Admins are responsible for assigning CHVs to supervisors. The assignment must be enforced by backend queries, not only dashboard filtering.</p>
+<h3 id="verification-gate">Verification gate<a class="headerlink" href="#verification-gate" title="Permanent link">&para;</a></h3>
+<p>An unverified CHV cannot perform protected operational actions.</p>
+<h3 id="mother-verification-gate">Mother verification gate<a class="headerlink" href="#mother-verification-gate" title="Permanent link">&para;</a></h3>
+<p>Where the product requires mother identity verification before record creation, the registration flow must not continue until verification succeeds.</p>
+<h3 id="consent-gate">Consent gate<a class="headerlink" href="#consent-gate" title="Permanent link">&para;</a></h3>
+<p>The application must not process maternal information for the stated purpose without the required consent.</p>
+<h3 id="role-controlled-ui">Role-controlled UI<a class="headerlink" href="#role-controlled-ui" title="Permanent link">&para;</a></h3>
+<p>The dashboard a user receives is determined by their role, but role-based UI is only a presentation layer. The API independently enforces permissions.</p>
+<h3 id="least-privilege">Least privilege<a class="headerlink" href="#least-privilege" title="Permanent link">&para;</a></h3>
+<p>Administrators and supervisors should not automatically receive unrestricted maternal-health visibility simply because they have higher privileges.</p>
+<h1 id="migrations">Migrations<a class="headerlink" href="#migrations" title="Permanent link">&para;</a></h1>
+<p>Every schema change should be represented by a migration.</p>
+<p>Migration discipline:</p>
+<ol>
+<li>make model change;</li>
+<li>generate/write migration;</li>
+<li>inspect SQL;</li>
+<li>test against a disposable database;</li>
+<li>run application tests;</li>
+<li>review data migration implications;</li>
+<li>deploy migration before/with application release as required.</li>
+</ol>
+<p>Never delete or rewrite production history to hide an incorrect migration. Create a corrective migration.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "navigation.instant", "navigation.instant.progress", "navigation.tracking", "content.code.copy", "search.suggest", "search.highlight"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
