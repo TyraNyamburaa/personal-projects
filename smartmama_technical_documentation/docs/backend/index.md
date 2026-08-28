@@ -80,7 +80,7 @@ Additional variables are required as integrations are enabled, including IDAnaly
 
 For production, configure secrets in the deployment environment rather than committing `.env`.
 
-# Project Structure
+## Project Structure
 
 The backend currently follows a package-oriented structure similar to:
 
@@ -111,7 +111,7 @@ Typical responsibility:
 As the platform expands, admin, supervisor, consent, audit and ticket functionality should follow the same separation rather than being placed inside unrelated modules.
 
 
-# API Reference
+## API Reference
 
 This page is the single reference for SmartMama's backend API surface, grouped by resource. For the authentication/authorization *model* (roles, scopes, token lifecycle), see [Security → Authentication](../security/authentication.md) and [Security → Authorization](../security/authorization.md). This page covers routes and resource-specific behaviour only.
 

@@ -13,7 +13,7 @@ The deployment process must:
 7. monitor logs;
 8. provide a rollback path.
 
-# Environment Configuration
+## Environment Configuration
 
 Production configuration is supplied through platform secrets/config vars.
 
@@ -28,7 +28,7 @@ Never commit:
 Use separate values for development, staging and production.
 
 
-# Heroku
+## Heroku
 
 The project uses:
 
@@ -54,7 +54,7 @@ web: uvicorn smartmama.main:app --host 0.0.0.0 --port $PORT
 Heroku provides `$PORT`; the application must listen on it.
 
 
-# GitHub Actions
+## GitHub Actions
 
 The deployment workflow should:
 
@@ -81,7 +81,7 @@ The workflow file is:
 If the repository uses a different filename, update this documentation to match.
 
 
-# Database Deployment
+## Database Deployment
 
 Production must use the deployment database URL rather than localhost.
 
@@ -90,7 +90,7 @@ The application should normalise Heroku's legacy `postgres://` scheme to SQLAlch
 Never hard-code production database credentials.
 
 
-# Secrets
+## Secrets
 
 Secrets are stored in:
 
@@ -109,7 +109,7 @@ If a secret is exposed:
 5. document the incident according to policy.
 
 
-# Production Verification
+## Production Verification
 
 After deployment:
 
@@ -125,7 +125,7 @@ After deployment:
 Do not use real maternal/identity data for smoke testing.
 
 
-# Rollback
+## Rollback
 
 A rollback should restore the last known-good application version.
 

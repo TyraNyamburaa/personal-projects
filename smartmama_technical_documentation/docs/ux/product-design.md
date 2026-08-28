@@ -36,9 +36,9 @@ The interface should:
 Risk states should use both colour and words such as "Low risk", "Medium risk" and "High risk".
 
 
-# Design System & User Flows
+## Design System & User Flows
 
-## Reusable UI patterns
+### Reusable UI patterns
 
 - buttons;
 - forms;
@@ -52,16 +52,16 @@ Risk states should use both colour and words such as "Low risk", "Medium risk" a
 
 Risk colours must never be the only signal. Use text labels and accessible indicators alongside colour.
 
-## User flows
+### User flows
 
-### CHV
+#### CHV
 
 ```text
 Onboard -> Verify -> Login -> Dashboard -> Register/Access Mother
 -> Household Visit -> Risk Classification -> Referral -> Follow-up
 ```
 
-### Supervisor
+#### Supervisor
 
 ```text
 Onboard by Admin -> Authenticate -> Verification Queue
@@ -69,14 +69,14 @@ Onboard by Admin -> Authenticate -> Verification Queue
 -> Assigned CHV oversight
 ```
 
-### Admin
+#### Admin
 
 ```text
 Authenticate -> Dashboard -> Onboard Supervisor
 -> Assign CHVs -> Review Activity -> Support
 ```
 
-### Mother
+#### Mother
 
 ```text
 Consent -> Identity Verification -> CHV Registration

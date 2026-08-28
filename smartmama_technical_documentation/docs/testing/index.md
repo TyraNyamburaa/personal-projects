@@ -19,32 +19,32 @@ SmartMama testing covers:
 Testing should include both happy paths and adversarial/edge cases.
 
 
-# Test Types
+## Test Types
 
-## Unit tests
+### Unit tests
 
 Unit tests should cover deterministic business logic without requiring real third-party services. Examples: password verification, role checks, assignment checks, consent validation, risk-class mapping, referral eligibility, file validation, error translation.
 
-## Integration tests
+### Integration tests
 
 Integration tests should verify interactions between: FastAPI and PostgreSQL; authentication and protected routes; service and repository layers; mocked identity verification; mocked SMS delivery; mocked location service; mocked malware scanner; risk classifier and persistence.
 
-## API tests
+### API tests
 
 API testing should verify: correct status codes, response schema, validation, authentication, authorisation, role restrictions, assignment restrictions, verification gates, consent gates, duplicate/conflict handling, and third-party failure handling. Every protected endpoint should have at least one negative authorisation test.
 
-## Mobile tests
+### Mobile tests
 
 Test: authentication, verification state, maternal registration, consent, file selection/upload, household visit, risk result comprehension, referral, SMS-related confirmation, interruption/recovery, network failure, and offline behaviour where supported. Test on Android devices/emulators representative of the target environment.
 
-## Security tests
+### Security tests
 
 Security QA should include: broken-access-control tests; IDOR tests on mother IDs; role escalation attempts; supervisor-scope bypass attempts; unverified-CHV access attempts; MFA bypass attempts; token replay/expiry tests; password reset abuse; upload malware tests; file-type spoofing; oversized files; sensitive data leakage in errors/logs; rate-limit checks; third-party failure/fail-open checks.
 
 A successful UI restriction is not evidence of backend authorisation.
 
 
-# Postman Testing
+## Postman Testing
 
 Maintain a Postman collection grouped by endpoint/domain.
 
@@ -110,7 +110,7 @@ At minimum, test:
 Each request should include positive, negative, boundary and security assertions.
 
 
-# Test Data
+## Test Data
 
 Use synthetic/test data only.
 
@@ -132,9 +132,9 @@ Test fixtures should include:
 Never place real national IDs, real patient records or real biometric data in Postman collections, screenshots or test fixtures.
 
 
-# Troubleshooting & Known Issues
+## Troubleshooting & Known Issues
 
-## Troubleshooting
+### Troubleshooting
 
 | Symptom | Likely cause | Fix |
 |---|---|---|
@@ -148,7 +148,7 @@ Never place real national IDs, real patient records or real biometric data in Po
 | Identity verification stuck | Provider unavailable or invalid request | Inspect provider-safe integration logs; do not fail open |
 | Mother record visible to wrong user | Authorisation defect | Treat as security incident; test ownership query immediately |
 
-## Known issues
+### Known issues
 
 This section is intentionally conservative. Only verified issues should be listed here.
 

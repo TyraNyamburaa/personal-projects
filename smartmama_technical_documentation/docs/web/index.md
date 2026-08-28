@@ -10,20 +10,20 @@ The three major administrative views are:
 
 A dashboard is selected based on the authenticated user's role. The backend independently enforces the same boundary.
 
-# Supervisor Dashboard
+## Supervisor Dashboard
 
 The supervisor dashboard is focused on CHV oversight.
 
-## Core sections
+### Core sections
 
-### Overview
+#### Overview
 
 - pending verification count;
 - verification actions requiring attention;
 - assigned CHV summary;
 - recent activity within scope.
 
-### CHV verification
+#### CHV verification
 
 A supervisor should be able to:
 
@@ -36,15 +36,15 @@ A supervisor should be able to:
 7. reject where requirements are not met;
 8. escalate ambiguous cases.
 
-### CHV list
+#### CHV list
 
 Only CHVs assigned to the supervisor should appear.
 
-### Activity
+#### Activity
 
 Show operational events relevant to the supervisor's scope without unnecessarily exposing maternal health information.
 
-## Verification states
+### Verification states
 
 Use:
 
@@ -57,13 +57,13 @@ Use:
 Do not use "Failed" as the supervisor's generic decision state when the case may simply need correction.
 
 
-# Admin Dashboard
+## Admin Dashboard
 
 The admin dashboard is for system-level operational management.
 
-## Suggested sections
+### Suggested sections
 
-### Overview
+#### Overview
 
 - users by role/status;
 - pending supervisor onboarding;
@@ -71,28 +71,28 @@ The admin dashboard is for system-level operational management.
 - unresolved support tickets;
 - recent security/administrative activity.
 
-### Supervisor management
+#### Supervisor management
 
 - create/onboard supervisor;
 - activate/deactivate;
 - assign CHVs;
 - review assignment state.
 
-### User management
+#### User management
 
 - search users;
 - view account status;
 - disable/re-enable accounts where authorised;
 - support password/MFA recovery workflows.
 
-### Activity logs
+#### Activity logs
 
 Admins can review appropriate system activity for support and security.
 
 Administrative visibility should not become unrestricted access to maternal clinical records.
 
 
-# Super Admin
+### Super Admin
 
 The super-admin dashboard is reserved for high-privilege operations.
 
@@ -109,7 +109,7 @@ Possible areas include:
 Super-admin actions must be strongly authenticated, audited and subject to the smallest practical number of users.
 
 
-# Routing
+## Routing
 
 Web routing should be role-aware.
 
@@ -125,7 +125,7 @@ Example logical routing:
 The frontend should redirect users away from routes they cannot use, but the backend must enforce the same permissions.
 
 
-# State Management
+## State Management
 
 The web client should keep authentication, user role, verification status and relevant dashboard data in managed application state.
 
@@ -134,7 +134,7 @@ Sensitive records should not be unnecessarily duplicated across global state.
 Use server responses as the source of truth for permission and verification state.
 
 
-# Components
+## Components
 
 Reusable components should be used for:
 
@@ -150,7 +150,7 @@ Reusable components should be used for:
 Components should not embed role-specific security logic that the backend does not enforce.
 
 
-# API Integration
+## API Integration
 
 The dashboard communicates with FastAPI over authenticated HTTP.
 

@@ -20,7 +20,7 @@
 | UX | User Experience |
 
 
-# Domain Terms
+## Domain Terms
 
 **Community Health Volunteer (CHV)**  
 The primary SmartMama field operator who conducts household visits and maternal monitoring.

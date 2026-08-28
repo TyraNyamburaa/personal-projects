@@ -75,13 +75,13 @@ The backend should use the lint/format configuration committed to the repository
 Comments explain **why**, not what obvious code already says. Use docstrings for public services, complex security decisions and integration boundaries. Avoid comments that become incorrect when code changes — security assumptions should be explicit and tested.
 
 
-# Error Handling
+## Error Handling
 
 Translate low-level exceptions into domain/API errors at the appropriate boundary. Do not return raw database exceptions or provider stack traces to clients.
 
 Expected business failures should be represented using predictable HTTP status codes and actionable messages.
 
-## HTTP status codes
+### HTTP status codes
 
 Use HTTP status codes consistently:
 
@@ -100,11 +100,11 @@ Use HTTP status codes consistently:
 Error messages should be actionable without leaking secrets, database details, stack traces or sensitive personal information. External provider errors should be translated into stable SmartMama-facing errors.
 
 
-# Logging
+## Logging
 
 Logs support debugging, security monitoring and incident response. Use structured logs where supported.
 
-## What to log
+### What to log
 
 - service lifecycle events;
 - integration failures;
@@ -113,7 +113,7 @@ Logs support debugging, security monitoring and incident response. Use structure
 
 Audit logs should record the actor, action, target/resource, timestamp, outcome and relevant metadata without unnecessarily duplicating sensitive data.
 
-## What never to log
+### What never to log
 
 - passwords;
 - JWTs/access tokens;
@@ -123,9 +123,9 @@ Audit logs should record the actor, action, target/resource, timestamp, outcome 
 - full maternal-health payloads unless explicitly required and protected.
 
 
-# Git Workflow
+## Git Workflow
 
-## Branching
+### Branching
 
 Use short-lived branches from the team's protected main branch.
 
@@ -141,7 +141,7 @@ docs/api-reference
 
 Merge through pull requests after review and checks.
 
-## Commit messages
+### Commit messages
 
 Use a consistent, searchable format.
 
@@ -158,7 +158,7 @@ refactor: extract IDAnalyzer service
 
 Keep commits focused and describe the actual change.
 
-## Pull requests
+### Pull requests
 
 Every PR should state:
 

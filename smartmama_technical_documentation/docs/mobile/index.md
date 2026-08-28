@@ -29,7 +29,7 @@ The mobile app must remain responsive and understandable under field conditions.
 - Android emulator or physical Android device
 
 
-# Flutter Architecture
+## Flutter Architecture
 
 The Flutter application should separate:
 
@@ -47,7 +47,7 @@ Use the architecture that is actually present in the Flutter repository. Do not 
 Security-sensitive rules remain server-side even if the mobile application also implements them for UX.
 
 
-# Project Structure
+## Project Structure
 
 A recommended logical structure is:
 
@@ -74,7 +74,7 @@ lib/
 Follow the actual repository structure if it differs. New code should be placed with the feature it belongs to rather than creating an unrelated global folder.
 
 
-# Navigation
+## Navigation
 
 Navigation should reflect user role and account state.
 
@@ -83,7 +83,7 @@ A CHV who is not verified should be directed to the verification/onboarding stat
 Navigation decisions are UX concerns; API authorisation is the security control.
 
 
-# Screen Flows
+## Screen Flows
 
 Primary CHV flow:
 
@@ -114,7 +114,7 @@ Start mother registration
 ```
 
 
-# CHV Registration
+## CHV Registration
 
 CHV onboarding includes:
 
@@ -130,7 +130,7 @@ CHV onboarding includes:
 The supervisor workflow distinguishes cases needing correction from final rejection.
 
 
-# Mother Registration
+## Mother Registration
 
 The CHV begins registration only after meeting the access prerequisites.
 
@@ -141,7 +141,7 @@ The system must not use a selfie to claim that someone is medically a mother or 
 The mother should understand what information is being collected and why.
 
 
-# API Integration
+## API Integration
 
 All protected API calls should:
 
@@ -154,14 +154,14 @@ All protected API calls should:
 
 Uploads should be sent through the security pipeline and should not be treated as trusted merely because the mobile app validated their extension.
 
-## Authentication and validation on the client
+### Authentication and validation on the client
 
 For the full authentication model and flow, see [Security → Authentication](../security/authentication.md). The mobile-specific rules: store only the minimum token/session information needed to authenticate calls, clear session state on logout, handle expiry, never expose tokens in logs, and show verification/access restrictions clearly. MFA uses TOTP where enabled; the server remains authoritative for the challenge.
 
 For validation rules (what the client checks before submission vs. what the server enforces authoritatively), see [Security → Validation](../security/validation.md).
 
 
-# Offline Behaviour
+## Offline Behaviour
 
 Field connectivity is a known product consideration.
 

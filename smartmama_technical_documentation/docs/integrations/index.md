@@ -9,11 +9,11 @@ SmartMama uses external providers for specialised capabilities.
 | LocationIQ | Location/geocoding | Coordinates/location queries |
 | AttachmentScanner | Malware scanning | Uploaded files |
 
-# IDAnalyzer
+## IDAnalyzer
 
 **Purpose:** identity/document verification for CHVs and mothers.
 
-## Integration boundary
+### Integration boundary
 
 The application sends only the information required by the provider's verification API.
 
@@ -26,18 +26,18 @@ Recommended internal outcomes:
 
 Administrative CHV documentation review uses a separate workflow state model (`pending`, `needs_correction`, `rejected`, `verified`, `escalated`).
 
-## Security
+### Security
 
 Provider credentials belong in secrets.
 
 Do not log identity documents, raw biometric material or provider credentials.
 
-## Failure handling
+### Failure handling
 
 If the provider is unavailable, the application should not silently treat the user as verified. The verification should remain incomplete and the user should receive a clear retry/status message.
 
 
-# SMS Leopard
+## SMS Leopard
 
 **Purpose:** SMS delivery.
 
@@ -48,7 +48,7 @@ The SMS service should receive only the minimum required recipient and message i
 Do not place national ID numbers, passwords or unnecessary clinical details into ordinary SMS content.
 
 
-# LocationIQ
+## LocationIQ
 
 **Purpose:** geolocation/geocoding and nearby-location functionality.
 
@@ -57,7 +57,7 @@ Location is sensitive. SmartMama should collect it only where justified by the p
 API credentials must be stored as secrets.
 
 
-# AttachmentScanner
+## AttachmentScanner
 
 **Purpose:** malware scanning of uploaded files.
 
@@ -72,7 +72,7 @@ The frontend performs early validation, but the backend must scan independently.
 A file must not be treated as trusted until it passes backend validation and scanning.
 
 
-# Integration Configuration
+## Integration Configuration
 
 Store provider credentials in environment variables/secrets.
 
@@ -91,7 +91,3 @@ Use the actual variable names implemented in the repository.
 For local development, use `.env` only and ensure it is ignored by Git.
 
 For production, configure secrets in the deployment platform.
-
-## PayPal
-
-SmartMama uses PayPal Payment Links for hosted checkout. See the [PayPal implementation guide](paypal.md) for the branded button, API flow, security requirements and production checklist.

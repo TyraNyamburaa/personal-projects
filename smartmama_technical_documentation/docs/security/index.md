@@ -115,7 +115,7 @@ An admin manages system operations and assignments. Administrative visibility sh
 ### Super Admin
 Super admins have elevated system privileges and should have stronger controls and audit coverage.
 
-## Request-level checks
+### Request-level checks
 
 ```text
 CHV request
@@ -141,7 +141,7 @@ Admin request
 
 This is the single canonical page for input validation across SmartMama. The backend must never trust client-side validation — every layer below is enforced independently.
 
-## Validation boundaries
+### Validation boundaries
 
 Validation occurs at multiple boundaries:
 
@@ -164,7 +164,7 @@ Examples include:
 - upload size/type;
 - malware scan result.
 
-## Mobile client validation
+### Mobile client validation
 
 The mobile client should validate obvious input errors before submission:
 
@@ -184,8 +184,7 @@ The current configuration uses a secret key, algorithm and access-token expiry.
 Required environment variables include:
 
 ```env
-SECRET_KEY=...
-ALGORITHM=HS256
+ALGORITHM=RS256
 ACCESS_TOKEN_EXPIRE_MINUTES=60
 ```
 

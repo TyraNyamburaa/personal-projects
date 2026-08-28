@@ -8,7 +8,7 @@ The AI component is not a diagnostic system.
 
 The interface and documentation must never describe a model output as confirmation that a mother has a medical condition.
 
-# Problem Being Solved
+## Problem Being Solved
 
 The model exists to support a CHV after a structured household visit.
 
@@ -18,7 +18,7 @@ The product problem is not "diagnose a mother with AI." It is:
 
 This distinction determines both model evaluation and UX requirements.
 
-# Random Forest Model
+## Random Forest Model
 
 A Random Forest is an ensemble classification method that combines multiple decision trees.
 
@@ -38,7 +38,7 @@ The production documentation should record:
 These details should be taken from the actual model repository before release.
 
 
-# Input Features
+## Input Features
 
 The research/product design identifies structured visit information including:
 
@@ -53,7 +53,7 @@ The original database documentation records these fields in `visit_log`.
 The exact feature vector used by the deployed Random Forest must be documented from the inference code/model artefact. A field existing in the database does not automatically mean it is used by the model.
 
 
-# Data Pipeline
+## Data Pipeline
 
 ```text
 Household visit
@@ -78,7 +78,7 @@ Referral/follow-up workflow
 The pipeline must fail safely when required model inputs are missing or invalid.
 
 
-# Training Process
+## Training Process
 
 The final production documentation must specify the actual training pipeline.
 
@@ -97,7 +97,7 @@ At minimum, record:
 Do not claim clinical validity or production readiness from a small prototype dataset.
 
 
-# Evaluation
+## Evaluation
 
 Model evaluation should go beyond overall accuracy.
 
@@ -116,7 +116,7 @@ Recommended measures include:
 Because a missed high-risk case can have a materially different consequence from an unnecessary referral, class-specific errors must be examined.
 
 
-# Results
+## Results
 
 The deployed documentation should contain the **actual measured model results**, including the dataset and test conditions used.
 
@@ -129,7 +129,7 @@ Until the final evaluation results are committed, record:
 This is preferable to presenting a prototype metric as clinical performance.
 
 
-# Risk Classification
+## Risk Classification
 
 The product currently uses three conceptual risk levels:
 
@@ -150,7 +150,7 @@ The UX must make clear:
 The system should support calibrated trust: users should neither blindly follow nor automatically dismiss the model.
 
 
-# Known Limitations
+## Known Limitations
 
 - Model quality depends on training data quality and representativeness.
 - Missing or incorrectly entered visit data can affect classification.

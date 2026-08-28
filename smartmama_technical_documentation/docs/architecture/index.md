@@ -12,35 +12,7 @@ The API is the enforcement point. The mobile/web UI may hide actions based on ro
 
 Authentication is separate from authorisation: a user first proves possession of valid credentials, then the backend determines whether that user may perform the requested action. See [Security → Authentication](../security/index.md) and [Security → Authorization](../security/index.md) for the full model and flow.
 
-
-# Architecture Diagram
-
-The logical flow is:
-
-```mermaid
-flowchart TD
-    CHV[CHV Mobile App] --> API[FastAPI Backend]
-    SUP[Supervisor Dashboard] --> API
-    ADM[Admin Dashboard] --> API
-    SA[Super Admin Dashboard] --> API
-
-    API --> AUTH[Authentication & Authorisation]
-    API --> DB[(PostgreSQL)]
-    API --> ID[IDAnalyzer]
-    API --> AV[AttachmentScanner]
-    API --> SMS[SMS Leopard]
-    API --> LOC[LocationIQ]
-    API --> RF[Random Forest Risk Classifier]
-
-    RF --> API
-    API --> DB
-    API --> SMS
-```
-
-The actual deployment diagram should be updated once the production hosting topology is finalised.
-
-
-# Component Overview
+## Component Overview
 
 | Component | Responsibility |
 |---|---|
@@ -58,9 +30,9 @@ The actual deployment diagram should be updated once the production hosting topo
 The final implementation should keep integration-specific code behind service modules so that the core domain logic does not depend directly on provider-specific HTTP calls.
 
 
-# Data Flow
+## Data Flow
 
-## Maternal monitoring
+### Maternal monitoring
 
 ```text
 CHV authentication
@@ -88,14 +60,14 @@ SMS notification / secure summary
 Follow-up
 ```
 
-## Sensitive-data boundary
+### Sensitive-data boundary
 
 Identity documents and verification data are sent to the identity-verification provider according to the provider's integration contract. SmartMama should avoid retaining raw biometric material unless there is a documented legal, security and product requirement to do so.
 
 Uploaded application files are scanned before being accepted for further processing. The scanner result must be treated as a security gate, not merely as a UI check.
 
 
-# Mother Registration Flow
+## Mother Registration Flow
 
 Mother registration is a protected CHV workflow.
 
@@ -114,7 +86,7 @@ Mother registration is a protected CHV workflow.
 A mother should never be represented as medically "mother_verified" based only on a selfie. The identity status is **identity verification**, not proof of pregnancy.
 
 
-# CHV Verification Flow
+## CHV Verification Flow
 
 The CHV onboarding flow has two layers:
 
@@ -123,20 +95,15 @@ The CHV onboarding flow has two layers:
 
 The product assumes that the CHV is an allocated government/community worker for the case study; the platform's responsibility is to verify the submitted identity and require the administrative verification step before granting operational access.
 
-Recommended state model:
+State model:
 
 - `pending`
-- `needs_correction`
 - `rejected`
 - `verified`
-- `escalated`
-
-The term "failed" should not be used for supervisor workflow states where the case may simply require correction. Identity-provider results may still be represented as `verified` or `failed` where that is the provider contract.
 
 Only a verified CHV should be allowed to perform protected CHV operations.
 
-
-# Risk Assessment Flow
+## Risk Assessment Flow
 
 During a household visit, the CHV records structured maternal-health information such as visit date, gestational age, blood pressure, temperature and symptoms.
 
@@ -153,7 +120,7 @@ Risk output should lead to an appropriate next step according to the configured 
 The final clinical decision remains with a qualified healthcare professional.
 
 
-# External Integrations
+## External Integrations
 
 SmartMama uses specialised third-party services for functions that should not be reimplemented inside the application.
 
@@ -167,7 +134,7 @@ SmartMama uses specialised third-party services for functions that should not be
 Integration calls should be isolated in service/adaptor modules. Provider credentials belong in environment configuration/secrets, not application source.
 
 
-# Implementation Status
+## Implementation Status
 
 SmartMama has evolved substantially from the original CHV-only prototype.
 
