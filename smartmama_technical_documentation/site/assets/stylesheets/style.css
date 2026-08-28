@@ -1,0 +1,167 @@
+:root {
+  --smartmama-primary: #2A286B;
+  --smartmama-accent: #F43F5E;
+  --smartmama-ink: #17162f;
+  --smartmama-muted: #66657d;
+  --smartmama-border: rgba(42, 40, 107, .12);
+  --smartmama-soft: rgba(42, 40, 107, .055);
+}
+
+[data-md-color-scheme="default"] {
+  --md-primary-fg-color: #2A286B;
+  --md-primary-fg-color--light: #45437F;
+  --md-primary-fg-color--dark: #211F56;
+  --md-accent-fg-color: #F43F5E;
+  --md-typeset-a-color: #2A286B;
+  --md-default-fg-color: #17162f;
+  --md-default-fg-color--light: #66657d;
+  --md-default-bg-color: #fff;
+  --md-code-bg-color: #f6f5fb;
+}
+
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color: #2A286B;
+  --md-primary-fg-color--light: #625f9e;
+  --md-primary-fg-color--dark: #211F56;
+  --md-accent-fg-color: #F43F5E;
+  --md-default-bg-color: #101024;
+  --md-default-fg-color: #f2f1f8;
+  --md-default-fg-color--light: #b5b3c7;
+  --md-code-bg-color: #0a0a18;
+  --md-typeset-color: #f2f1f8;
+  --md-typeset-a-color: #aaa7ff;
+}
+
+.md-header {
+  background: rgba(42, 40, 107, .96);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 1px 0 rgba(255,255,255,.08);
+}
+.md-logo {
+  height: 2.8rem;
+  width: auto;
+}
+.md-tabs {
+  background: #2A286B;
+  position: relative;
+  z-index: 3;
+}
+.md-tabs__link {
+  font-weight: 650;
+  opacity: .78;
+}
+.md-tabs__link--active,
+.md-tabs__link:hover { opacity: 1; color: #fff; }
+
+.md-main__inner { margin-top: 1.35rem; }
+.md-content__inner { padding-bottom: 4rem; }
+
+.md-nav__link--active,
+.md-nav__link:focus,
+.md-nav__link:hover,
+.md-typeset a:hover { color: #F43F5E; }
+
+.md-button {
+  border-radius: 999px;
+  font-weight: 700;
+  border: 1px solid var(--smartmama-border);
+}
+
+/* Landing-page cards */
+.smartmama-hero {
+  padding: clamp(2rem, 7vw, 5.5rem) 0 2.5rem;
+  max-width: 900px;
+}
+.smartmama-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  margin-bottom: 1rem;
+  padding: .35rem .7rem;
+  border: 1px solid rgba(244,63,94,.2);
+  border-radius: 999px;
+  color: #F43F5E;
+  background: rgba(244,63,94,.06);
+  font-size: .78rem;
+  font-weight: 800;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.smartmama-hero h1 {
+  font-size: clamp(2.5rem, 6vw, 4.6rem);
+  line-height: 1.02;
+  letter-spacing: -.045em;
+  margin: 0 0 1rem;
+  color: #2A286B;
+}
+[data-md-color-scheme="slate"] .smartmama-hero h1 { color: #fff; }
+.smartmama-hero p {
+  max-width: 720px;
+  font-size: 1.12rem;
+  line-height: 1.75;
+  color: var(--md-default-fg-color--light);
+}
+.smartmama-actions { display:flex; gap:.7rem; flex-wrap:wrap; margin-top:1.5rem; }
+
+.smartmama-card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 2rem 0 3rem;
+}
+.smartmama-card {
+  display: block;
+  min-height: 150px;
+  padding: 1.35rem;
+  border: 1px solid var(--smartmama-border);
+  border-radius: 18px;
+  background: var(--smartmama-soft);
+  text-decoration: none !important;
+  transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+}
+.smartmama-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(244,63,94,.4);
+  box-shadow: 0 14px 34px rgba(42,40,107,.10);
+}
+.smartmama-card-icon {
+  display:grid; place-items:center; width:2.25rem; height:2.25rem;
+  margin-bottom:.85rem; border-radius:10px;
+  background:#2A286B; color:#fff; font-weight:800;
+}
+.smartmama-card strong { display:block; color:var(--md-default-fg-color); font-size:1rem; margin-bottom:.35rem; }
+.smartmama-card span { color:var(--md-default-fg-color--light); font-size:.9rem; line-height:1.5; }
+
+.md-typeset .admonition,
+.md-typeset details,
+.md-typeset pre,
+.md-typeset table:not([class]) {
+  border-radius: 14px;
+}
+.md-typeset pre { box-shadow: none; border: 1px solid var(--smartmama-border); }
+.smartmama-architecture-diagram {
+  display: block;
+  width: 100%;
+  max-width: 1100px;
+  height: auto;
+  margin: 1.5rem auto 2.5rem;
+  border: 1px solid var(--smartmama-border);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(42,40,107,.08);
+}
+.md-typeset code { border-radius: 6px; }
+.md-typeset h2 { margin-top: 2.6em; }
+
+.smartmama-pay-button {
+  display:inline-flex; align-items:center; gap:.55rem; padding:.72rem 1.15rem;
+  border-radius:999px; background:#2A286B; color:#fff !important; font-weight:750;
+  text-decoration:none; box-shadow:0 8px 22px rgba(42,40,107,.18);
+  transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
+}
+.smartmama-pay-button:hover { background:#F43F5E; color:#fff !important; transform:translateY(-1px); box-shadow:0 10px 26px rgba(244,63,94,.24); }
+.smartmama-pay-button svg { width:1.15rem; height:1.15rem; }
+
+@media (max-width: 900px) {
+  .smartmama-card-grid { grid-template-columns: 1fr; }
+  .md-tabs { overflow-x: auto; }
+}
