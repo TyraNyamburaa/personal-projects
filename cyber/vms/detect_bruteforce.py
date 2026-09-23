@@ -1,6 +1,7 @@
 from collections import defaultdict
 
 LOG_FILE = "auth.log"
+BANNED_FILE = "banned_ips.txt"
 FAILED_THRESHOLD = 3
 
 
@@ -25,12 +26,17 @@ def analyze_logs():
         if count >= FAILED_THRESHOLD:
             print(f"\nALERT: Brute-Force Attack Detected!")
             print(f"    Source IP: {ip}")
-            print(f"    Failed Attempts: {count}")
-            print(f"    Recommendation: Block this IP at the firewall immediately.")
+            print(f"Automating Mitigation: Adding {ip} to {BANNED_FILE}...")
+
+            with open(BANNED_FILE, "a") as banned_file:
+                banned_file.write(f"{ip}\n")
+            
             alerts_triggered = True
 
     if not alerts_triggered:
         print("[+] Log analysis complete. No malicious patterns detected.")
+    else:
+        print(f"\n[+] Mitigation complete. Review updated policy in {BANNED_FILE}.")
 
 
 if __name__ == "__main__":
