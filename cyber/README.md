@@ -19,7 +19,7 @@
 
 **Red Team (Offense):** Deployed a defense evasion tactic by renaming the auth log (`mv auth.log system_config.bak`) to hide malicious activity from naive filename-based detectors.
 
-**Vulnerability Identified:** The defense relied on hardcoded filenames — a brittle assumption that fails under basic evasion.
+**Vulnerability Identified:** The defense relied on hardcoded filenames - a brittle assumption that fails under basic evasion.
 
 **Blue Team (Defense):** Developed a **content-based heuristic scanner** that inspects file contents (signatures, entropy, structure) rather than trusting filenames, defeating the evasion and restoring detection capability.
 
